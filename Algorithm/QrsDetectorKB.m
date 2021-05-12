@@ -1,5 +1,5 @@
 function  [qrs_blk] = QrsDetectorKB(ecg_signal,fs,pltotion)
-%QRSDETECTOR1 Knowledge based QRS detector
+%QRSDETECTORKB Knowledge based QRS detector
 %
 % Author: Onder Nazim Onak
 % 
@@ -11,9 +11,8 @@ function  [qrs_blk] = QrsDetectorKB(ecg_signal,fs,pltotion)
 %  'butter' for butterworth filter
 %
 % Optinal variables
-% ftype -> Filter type 
-%          'butter' -> Butterworth filter
-%          'ellip' -> Elliptic filter
+% pltotion -> boolean ploting option. If true plot ecg sinal and detected QRS
+% points
 %
 %
 % INPUT variables

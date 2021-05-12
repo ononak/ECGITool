@@ -4,14 +4,14 @@ function [earthModel] = DdModelingMars(train_ep, train_bsp)
 %
 % INPUT: 
 %
-% train_ep  -> (T x En) training data for EGM data, 
-%  T is the number of time samples, En is the number of EGM lead
+% train_ep  -> (Ns x Ne) training data for EGM data, 
+%  Ns is the number of samples, Ne is the number of EGM lead
 
-% train_bsp  -> (T x Bn) training data for BSPM data, 
-%  T is the number of time samples, Bn is the number of body surface lead
+% train_bsp  -> (Ns x Nb) training data for BSPM data, 
+%  Ns is the number of samples, Nb is the number of body surface lead
 %
 %
-% OUTPUT : Estimated x (nx1) vector
+% OUTPUT : 
 %
 % earthModel -> MARS model for each EGM
 %

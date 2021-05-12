@@ -3,18 +3,20 @@ function [ lat] = LocalActTime(signal)
 %
 % Author: Onder Nazim Onak ononak@gmail.com
 
-filteredSignal = zeros(size(signal));
-[nlead ntime] = size(signal);
-lat = zeros(nlead,1);
+ [nlead,~] = size(signal);
+ lat = zeros(nlead,1);
+
+ [filteredSignal] = SmoothingFilter(signal, 3);
  
- t = 1:1:size(signal,2);
- 
-     for i=1:nlead       
-      [dif difHR fsignal] = DiffByRegularization(signal(i,:));
-       h = ntime/(length(difHR(1,:)) - 1); 
-      [~, ind] = min(difHR);
-      [lat(i,1)] = ind*h;
-     end
+ for i=1:nlead       
+  %[dif difHR fsignal] = DiffByRegularization(signal(i,:));
+   dif = gradient(filteredSignal(i,:));
+   [~, ind] = min(dif);
+   lat(i,1) = ind;
+   %h = ntime/(length(difHR(1,:)) - 1); 
+%       [~, ind] = min(difHR);
+%       [lat(i,1)] = ind*h;
+ end
 
 end
 

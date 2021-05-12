@@ -8,8 +8,6 @@ addpath('../DataDriven');
 load('trainingData.mat')
 load('utah.mat') % test data
 
-
-
 %% generate model for EGM 10
 earthModel_10 = DdModelingMars(training.Ep(:,10), training.Bsp);
 % predict EGM 20 corresponding to from new Bspm

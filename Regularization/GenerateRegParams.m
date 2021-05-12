@@ -1,8 +1,9 @@
-function [ reg_param ] = GenerateRegParams(ftm , npoints)
+function [ reg_param ] = GenerateRegParams(ftm , npoints, R)
 % GENERATEREGPARAMS Generates range og regularization parameters
 % Input variables
 %  ftm -> Forward transfer matrix.
 %  npoint -> number of regularization parameter to be generated
+%  R -> Regularization matrix (if it is not provided, R is assumed to be I matrix)
 %
 % Output variables
 % reg_param -> Regularization parameter list
@@ -11,8 +12,17 @@ function [ reg_param ] = GenerateRegParams(ftm , npoints)
 %
 % Author: Onder Nazim Onak ononak@gmail.com
 
-[U sm V] = svd(ftm);
-s =diag(sm);
+switch nargin
+    case 2
+        [~, sm, ~] = svd(ftm);
+        s =diag(sm);
+    case 3
+        [~,~,~,C,S] = gsvd(ftm,R);
+        s =[diag(C); diag(S)];        
+    otherwise
+        error('invalid number of input');
+end
+
 
 smin_ratio = 16*eps;
   reg_param(npoints) = max([s(end),s(1)*smin_ratio]);

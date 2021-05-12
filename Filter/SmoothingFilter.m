@@ -7,6 +7,7 @@ filteredSignal = zeros(size(signal));
 
 if(nargin == 2)
     order = polyOrder;
+    framelen = 11;
 elseif(nargin == 3)
     order = polyOrder;
     framelen = frameLenght;     
@@ -15,11 +16,7 @@ else
     framelen = 11;
 end
         
-   
-
-
-
-    parfor i=1:size(signal,1)
+    for i=1:size(signal,1)
         filteredSignal(i,:) = sgolayfilt(signal(i,:),order,framelen);
     end
 end

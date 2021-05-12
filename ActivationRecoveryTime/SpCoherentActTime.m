@@ -22,10 +22,15 @@ function [at] = SpCoherentActTime(potvals, geom)
 
 % take the derivative of the potentials
 
-[m, ~] = size(potvals);
+[m, n] = size(potvals);
 
-% filter potvals and compute time derivatives
-[dif difHR fsignal] = DiffByRegularization(potvals);
+    [filteredSignal] = SmoothingFilter(potvals, 3);
+    
+    dif = zeros(m,n);
+    for i=1:m
+        dif(i,:) = gradient(filteredSignal(i,:));
+    end
+    
 
     neighbours = NeighbourList(geom.fac);
 
@@ -48,7 +53,7 @@ function [at] = SpCoherentActTime(potvals, geom)
     end
 
     % Find the local activation times
-   LAT = Lat(dif, difHR, fsignal);
+   LAT = LocalActTime(potvals);
     
     % Recast the activation times considering the computed time delays 
     I = eye(m,m);
@@ -86,16 +91,4 @@ function [time_delay] = TimeDelay(dpot1, dpot2)
     time_delay = xq(ind);
 end
 
-function [ lat] = Lat(dif, difHR, fsignal)
-%LOCALACTTIME Computes the local activation time
-
-[nlead, ntime] = size(fsignal);
-lat = zeros(nlead,1);
-h = ntime/(length(difHR(1,:)) - 1);
-     for i=1:nlead        
-      [~, ind] = min(difHR(i,:));
-      [lat(i,1)] = ind*h;
-     end
-
-end
 

@@ -24,9 +24,7 @@ A = eye(nlead);
 % initialize activation time vector
 [ lat] = LocalActTime(potvals);
 
-loglambda = [1:0.2:1+100*0.2];
-reg_param = exp(log(10)*loglambda)*eps; % range of reg params
-
+[reg_param] = GenerateRegParams(A , 250, L);
 
 [gat_tmp,rho,eta] = Tikhonov(A,L,lat,reg_param);
 [ ~, ~, regparamIndex] = LCurveCorner(rho, eta, reg_param);

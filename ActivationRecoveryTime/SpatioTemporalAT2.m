@@ -12,22 +12,24 @@ function [at] = SpatioTemporalAT2(potvals, geom)
 %   at  Activation time vector (size: m x 1):
 %
 
+[m, n] = size(potvals);
 
-[nlead ntime] = size(potvals);
+[filteredSignal] = SmoothingFilter(potvals, 3);
 
-A = eye(ntime);
-% initialize activation time vector
-[dif difHR fsignal] = DiffByRegularization(potvals);
-
+dif = zeros(m,n);
+for i=1:m
+    dif(i,:) = gradient(filteredSignal(i,:));
+end
+    
 
 wdif = dif;
-for i=1:ntime   
-    [GF, GVal] = SurfaceGradientField(geom, potvals(:,i));
-    wdif(:,i) = GVal.*wdif(:,i);
+for i=1:n   
+    [GFV GFN] = SurfaceGradientField(geom, potvals(:,i));
+    wdif(:,i) = GFN'.*dif(:,i);
 end
 
 
-for i=1:nlead
+for i=1:m
     [~,at(i,1)] = min(wdif(i,:));
 end
 
