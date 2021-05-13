@@ -1,2 +1,2 @@
 # ECG Imaging toolbox
-Matlab toolbox for ECG Imaging problems
+Matlab toolbox for ECG Imaging
