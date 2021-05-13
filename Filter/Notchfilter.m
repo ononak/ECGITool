@@ -17,10 +17,10 @@ function [fsignal] = Notchfilter(signal, fs, fstop)
 %% Generate filter coefficients
 fn = fs/2; % Nyquist frequency
 Ws = fstop/fn; % Normalised Stopband
-bw = (fstop + 2)/fn; 
+bw = (fstop + 1)/fn; 
    
 [num,den]=iirnotch(Ws,bw);
-
+%fvtool(num,den)
 %% Apply filter reverse and forward direction to obtain zero phase filtered signal
 
 [fsignal] = filtfilt(num, den, signal);

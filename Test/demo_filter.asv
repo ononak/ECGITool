@@ -1,14 +1,12 @@
 % Author: Onder Nazim Onak
-clc
-clear
 addpath('../Filter');
 load('../Test/noisy_bspm.mat')
 
-fs = 2048;
+fs = 2048  ;
 
 %% moving average filter  
 i= 2;
-x = ts.potvals(i,:);
+x = ts.potvals(i,1:3000);
 
 ws = 15;
 fsignal = Movav(x,ws);
@@ -30,7 +28,7 @@ power_noisy = abs(ynoisy).^2/n;    % power of the DF
 power_filtered = abs(yfiltered).^2/n;    % power of the DF
 
 subplot(2,1,2)
-plot(fstep(100:500),[power_noisy(100:500)' power_filtered(100:500)'],'LineWidth',2)
+plot(fstep(1:100),[power_noisy(1:100)' power_filtered(1:100)'],'LineWidth',2)
 title('Power spectrum')
 xlabel('Frequency');
 ylabel('Power');
@@ -72,7 +70,7 @@ legend({'noisy' 'filtered'})
 
 i =1;
 filterType = 'butterworth';
-noisy = ts.potvals(i,:);
+noisy = ts.potvals(i,1:1000);
 fstop = 50;
 [fsignal] = Notchfilter(noisy, fs,fstop);
 
@@ -87,7 +85,7 @@ legend({'noisy' 'filtered'})
 
 
 % power spectrum
-ynoisy = fft(noisy);
+ynoisy = fft(ts.potvals(i,:));
 yfiltered = fft(fsignal);
 n = length(ts.potvals(i,:));          % number of samples
 fstep = (0:n-1)*(fs/n);     % frequency range
@@ -95,7 +93,7 @@ power_noisy = abs(ynoisy).^2/n;    % power of the DF
 power_filtered = abs(yfiltered).^2/n;    % power of the DF
 
 subplot(2,1,2)
-plot(fstep(100:350),[power_noisy(100:350)' power_filtered(100:350)'],'LineWidth',2)
+plot(fstep(1:50),[power_noisy(1:50)' power_filtered(1:50)'],'LineWidth',2)
 title('Power spectrum')
 xlabel('Frequency');
 ylabel('Power');
