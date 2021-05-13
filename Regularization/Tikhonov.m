@@ -1,4 +1,4 @@
-function [ x_reg errNorm constNorm ] = Tikhonov( A, R, y, lambda)
+function [ x_reg, errNorm, constNorm ] = Tikhonov( A, R, y, lambda)
 % TIKHONOV 
 %  Computes the Tikhonov regularized solution
 %  min { || A x - y ||^2 + lambda^2 || Rx||^2 } .
@@ -54,7 +54,7 @@ end
 %
 % solve l2l2 regularization problem
 %
-function [x_sol errNorm constNorm] = solve(U,V,W,C,M,X,bF,lambda,k)
+function [x_sol] = solve(U,V,W,C,M,X,bF,lambda,k)
 
     lambda2 = lambda^2;
     

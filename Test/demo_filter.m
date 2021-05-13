@@ -36,7 +36,7 @@ i =1;
 filterType = 'butterworth';
 noisy = ts.potvals(i,1:1000);
 fstop = 50;
-[fsignal] = Notchfilter(noisy, fs,fstop,filterType);
+[fsignal] = Notchfilter(noisy, fs,fstop);
 
 figure(3);
 plot([noisy' fsignal'])

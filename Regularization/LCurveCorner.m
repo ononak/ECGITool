@@ -1,10 +1,15 @@
-function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, lambda)
+function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, lambda, pltotion)
 % LCURVECORNER Finds the corner of the L curve
 %   
 % Input variables
 % errNorm -> list of || A x_reg - y ||^p 
 % constNorm -> list of || Rx||^q
 % lambda -> list of regularization coefficient
+%
+% Optinal variables
+% pltotion -> boolean ploting option. If true plot ecg sinal and detected QRS
+% points
+%
 %
 % Output variables
 % corner -> curvature
@@ -17,6 +22,10 @@ function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, la
 %
 % Author: Onder Nazim Onak ononak@gmail.com
 
+%% parameters
+	if ~exist('pltotion')
+		pltotion = false;
+	end
 
     logErrNorm = log10(errNorm);
     logConstrNorm = log10(constrNorm);
@@ -78,12 +87,15 @@ function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, la
    regparam = lambda(params(1));
    regparamIndex = params(1);
 
-   line([logErrNorm(regparamIndex);logErrNorm(regparamIndex)], [logConstrNorm(1);logConstrNorm(end)],'linestyle','--')
-   line([logErrNorm(1);logErrNorm(end)], [logConstrNorm(regparamIndex);logConstrNorm(regparamIndex)],'linestyle','--')
-   line(logErrNorm, logConstrNorm, 'Marker', 'x', 'Color', 'r')
+   if(pltotion)
+        line([logErrNorm(regparamIndex);logErrNorm(regparamIndex)], [logConstrNorm(1);logConstrNorm(end)],'linestyle','--')
+        line([logErrNorm(1);logErrNorm(end)], [logConstrNorm(regparamIndex);logConstrNorm(regparamIndex)],'linestyle','--')
+        line(logErrNorm, logConstrNorm, 'Marker', 'x', 'Color', 'r')
 
-   txt = strcat('\lambda = ',sprintf('%.2f',regparam));
-   text(logErrNorm(regparamIndex),logConstrNorm(end),txt)
+        txt = strcat('\lambda = ',sprintf('%.2f',regparam));
+        text(logErrNorm(regparamIndex),logConstrNorm(end),txt)
+   end
+
 end
 
 

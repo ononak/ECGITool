@@ -1,5 +1,6 @@
 function [ D ] = SurfaceGradient(geom)
-% SURFACE_GRADIENT  Calculates the surface Gradient for 3D mesh
+% SURFACE_GRADIENT  Calculates the surface Gradient operator for 3D mesh
+% surface
 %
 % Usage:   D = SurfaceGradient(geom)
 % 
@@ -18,6 +19,8 @@ function [ D ] = SurfaceGradient(geom)
 %
 % Author: Onder Nazim Onak ononak@gmail.com
 %
+
+
 %initialize
 neighbours = NeighbourList(geom.fac);
 D = zeros(size(neighbours,1));
