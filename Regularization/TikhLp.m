@@ -21,7 +21,7 @@ tau = 1.1;
 
 
 % [m n] = size(A);
- [U s V] = svd(A);
+ [U, s, V] = svd(A);
 
 xk = x0;
 

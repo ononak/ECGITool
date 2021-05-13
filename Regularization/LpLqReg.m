@@ -84,9 +84,9 @@ MAX_ITER = 1000;
 %
 % solve l2l2 regularization problem
 %
-function [x_sol] = solve(AF,LR,bF,lambda,k)
+function [x_sol] = solve(AF,LR,bF,lambda)
    
-    [m n] = size(AF);
+    [m, n] = size(AF);
 
     if(m>n)
         k = 0;

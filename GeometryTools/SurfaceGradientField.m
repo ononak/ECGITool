@@ -1,5 +1,6 @@
 function [GradientVector] = SurfaceGradientField(geom, funcValue)
-% SURFACEGRADIENTFIELD  Calculates the surface Gradient for 3D mesh
+% SURFACEGRADIENTFIELD  Generates the gradient field vector for the function defined on
+% the 3D mesh surface
 %
 % 
 % Input:
@@ -19,6 +20,8 @@ function [GradientVector] = SurfaceGradientField(geom, funcValue)
 %
 % Author: Onder Nazim Onak ononak@gmail.com
 %
+
+
 %initialize
 number_of_vtx = size(geom.pts,2);
 neighbours = NeighbourList(geom.fac);

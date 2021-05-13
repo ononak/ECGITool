@@ -19,9 +19,10 @@ patch('Vertices',epigeom.pts','Faces',epigeom.fac','FaceVertexCData',scat,'FaceC
 colorbar
 title('Spationaly Coherent Activation Time Method')
 
+
+
 [ L ] = SurfaceLaplacian(epigeom);
 [stat] = SpatioTemporalAT(ep, L);
-
 figure(3);
 patch('Vertices',epigeom.pts','Faces',epigeom.fac','FaceVertexCData',stat,'FaceColor','interp');
 colorbar

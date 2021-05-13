@@ -1,5 +1,5 @@
-function [GF, GVal] = SurfaceGradientField(geom, valueVector)
-% SURFACE_GRADIENT_FIELD  Calculates the surface Gradient field for 3D mesh
+function [GF, GVal] = SurfaceGradientField2(geom, valueVector)
+% SURFACEGRADIENTFIELD2  Calculates the surface Gradient field for 3D mesh
 %
 % Usage:   GF = SurfaceGradientField(geom)
 % 

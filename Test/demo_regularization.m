@@ -40,11 +40,11 @@ tic
 [x_5,rho5,eta5] = TotalVariation(ftm,L,bspm(:,time),reg_param);
 toc
 
-[ ~, ~, regparamIndex1] = LCurveCorner(rho1, eta1, reg_param);
-[ ~, ~, regparamIndex2] = LCurveCorner(rho2, eta2, reg_param);
-[ ~, ~, regparamIndex3] = LCurveCorner(rho3, eta3, reg_param);
-[ ~, ~, regparamIndex4] = LCurveCorner(rho4, eta4, reg_param);
-[ ~, ~, regparamIndex5] = LCurveCorner(rho5, eta5, reg_param);
+[ ~, ~, regparamIndex1] = LCurveCorner(rho1, eta1, reg_param,true);
+[ ~, ~, regparamIndex2] = LCurveCorner(rho2, eta2, reg_param,true);
+[ ~, ~, regparamIndex3] = LCurveCorner(rho3, eta3, reg_param,true);
+[ ~, ~, regparamIndex4] = LCurveCorner(rho4, eta4, reg_param,true);
+[ ~, ~, regparamIndex5] = LCurveCorner(rho5, eta5, reg_param,true);
 
 figure;
 plot([ ep(:,time) x_1(:,regparamIndex1) x_2(:,regparamIndex2) x_3(:,regparamIndex3) x_4(:,regparamIndex4) x_5(:,regparamIndex5)]);
@@ -54,18 +54,5 @@ ylabel('mV')
 xlabel('lead')
 
 
-[at_true] = SpCoherentActTime(ep, epigeom);
-figure;
-patch('Vertices',epigeom.pts','Faces',epigeom.fac','FaceVertexCData',at_true,'FaceColor','interp');
-title('True AT map')
 
-% [at_zot] = SpCoherentActTime(x_1, epigeom);
-% figure;
-% patch('Vertices',epigeom.pts','Faces',epigeom.fac','FaceVertexCData',at_zot,'FaceColor','interp');
-% title('AT map obtained by using Zot estimation results')
-% 
-% [at_tv1] = SpCoherentActTime(x_4, epigeom);
-% figure;
-% patch('Vertices',epigeom.pts','Faces',epigeom.fac','FaceVertexCData',at_tv1,'FaceColor','interp');
-% title('AT map obtained by using TV1 estimation results')
 

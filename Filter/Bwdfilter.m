@@ -39,10 +39,10 @@ fn = fs/2;                                                  % Nyquist Frequency 
 if(strcmp(ftype,'elliptic'))
 % Eliptic filter params cut off freq 0.5, passband attenuation 3 dB
 % stopband attenuation 60dB
- [num den] = ellip(3,3,60,.5/fn,'high');
+ [num, den] = ellip(3,3,60,.5/fn,'high');
 elseif(strcmp(ftype,'butterworth'))
  %Butterworth filter
- [num den] = butter(2,.5/fn,'high');
+ [num, den] = butter(2,.5/fn,'high');
 else
     error('Unknown filter type')
 end

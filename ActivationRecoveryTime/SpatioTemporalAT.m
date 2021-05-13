@@ -27,7 +27,7 @@ A = eye(nlead);
 [reg_param] = GenerateRegParams(A , 250, L);
 
 [gat_tmp,rho,eta] = Tikhonov(A,L,lat,reg_param);
-[ ~, ~, regparamIndex] = LCurveCorner(rho, eta, reg_param);
+[ ~, ~, regparamIndex] = LCurveCorner(rho, eta, reg_param,true);
 at = gat_tmp(:,regparamIndex);
 
 end
