@@ -75,7 +75,10 @@ function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, la
    corner = kappa(index(1));
    params = find(lambda<knots(index(1)));
    
-   plot(ppEval,ppCval);
+   if(pltotion)
+    plot(ppEval,ppCval);
+   end
+   
    if(isempty(params))
        warning("L-curve corner could not be determined");
        corner = [];
