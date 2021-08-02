@@ -33,7 +33,7 @@ function [x_hat, ern,  cn] = LpLqReg(A,R,b,p,q,lambda,x0)
 % init loop control params    
 tol = 1e-3;
 diff = 1e10;
-MAX_ITER = 1000;
+MAX_ITER = 200;
 
     % initial estimation
     if(nargin == 7)
@@ -44,6 +44,8 @@ MAX_ITER = 1000;
 
   iter = 0;
     %% starting from initial estimation iterate till converge
+    
+    hold off
   while (diff > tol) 
 
   %% Compute weight matrices    
@@ -66,12 +68,18 @@ MAX_ITER = 1000;
     %% check convergence
     difftmp = norm(x_est_new - x_est)/norm(x_est);
 
-    iter = iter + 1;
-    x_est = x_est_new;
-
     if((iter > MAX_ITER) || (difftmp < tol))
         break;
     end
+    
+%     if( (difftmp > 1.2*diff))
+%         break
+%     end
+    
+    iter = iter + 1;
+    x_est = x_est_new;    
+    diff = difftmp;
+    
   end
 
   x_hat = x_est;
@@ -79,6 +87,7 @@ MAX_ITER = 1000;
   ern = norm(A*x_est - b,p); 
   %constraint norm
   cn = norm(R*x_est,q);
+  
  end
 
 %

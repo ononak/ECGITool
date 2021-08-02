@@ -33,7 +33,7 @@ function [ x_reg, errNorm, constNorm ] = TotalVariation( A, R, y, lambda)
     errNorm = zeros(length(lambda),1);
     constNorm = zeros(length(lambda),1);
     
-    parfor (i=1:length(lambda))
+    for (i=1:length(lambda))
         [ x_reg(:,i), errNorm(i,1), constNorm(i,1)] = LpLqReg(A,R,y,2,1,lambda(i));
     end
 end
