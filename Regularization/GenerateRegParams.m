@@ -25,11 +25,11 @@ end
 
 
 smin_ratio = 16*eps;
-  reg_param(npoints) = max([s(end),s(1)*smin_ratio]);
+  reg_param(npoints,1) = max([s(end),s(1)*smin_ratio]);
   ratio = (s(1)/reg_param(npoints))^(1/(npoints-1));
   for i=npoints-1:-1:1, reg_param(i) = ratio*reg_param(i+1); end
   
-  reg_param = reg_param*12000/max(reg_param);
+  %reg_param = reg_param*12000/max(reg_param);
 
 end
 

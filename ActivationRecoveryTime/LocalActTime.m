@@ -6,7 +6,7 @@ function [ lat] = LocalActTime(signal)
  [nlead,~] = size(signal);
  lat = zeros(nlead,1);
 
- [filteredSignal] = SmoothingFilter(signal, 3);
+ [filteredSignal] = SmoothingFilter(signal, 3,31);
  
  for i=1:nlead       
   %[dif difHR fsignal] = DiffByRegularization(signal(i,:));

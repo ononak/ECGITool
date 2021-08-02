@@ -28,6 +28,11 @@ A = eye(nlead);
 
 [gat_tmp,rho,eta] = Tikhonov(A,L,lat,reg_param);
 [ ~, ~, regparamIndex] = LCurveCorner(rho, eta, reg_param,true);
+
+if(isempty(regparamIndex))
+    regparamIndex = length(reg_param);
+end
+
 at = gat_tmp(:,regparamIndex);
 
 end

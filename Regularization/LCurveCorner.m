@@ -25,8 +25,10 @@ function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, la
 %% parameters
 	if ~exist('pltotion')
 		pltotion = false;
-	end
+    end
 
+    initial_lambda = lambda; 
+    
     logErrNorm = log10(errNorm);
     logConstrNorm = log10(constrNorm);
     logErrNorm = SmoothingFilter( logErrNorm',3,11)';
@@ -75,7 +77,10 @@ function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, la
    corner = kappa(index(1));
    params = find(lambda<knots(index(1)));
    
-   plot(ppEval,ppCval);
+   if(pltotion)
+    plot(ppEval,ppCval);
+   end
+   
    if(isempty(params))
        warning("L-curve corner could not be determined");
        corner = [];
@@ -86,7 +91,7 @@ function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, la
    
    regparam = lambda(params(1));
    regparamIndex = params(1);
-
+    
    if(pltotion)
         line([logErrNorm(regparamIndex);logErrNorm(regparamIndex)], [logConstrNorm(1);logConstrNorm(end)],'linestyle','--')
         line([logErrNorm(1);logErrNorm(end)], [logConstrNorm(regparamIndex);logConstrNorm(regparamIndex)],'linestyle','--')
@@ -95,7 +100,9 @@ function [ corner regparam regparamIndex] = LCurveCorner(errNorm, constrNorm, la
         txt = strcat('\lambda = ',sprintf('%.2f',regparam));
         text(logErrNorm(regparamIndex),logConstrNorm(end),txt)
    end
-
+   
+    pi = find(initial_lambda==regparam);
+    regparamIndex = pi(1);
 end
 
 
