@@ -14,6 +14,9 @@ earthModel_10 = DdModelingMars(training.Ep(:,10), training.Bsp);
 % BSPM must be (TxN) matrix where T is the number of time samples and N is the number of BSP lead
 egm_10 = earthModel_10.predict(bspm');   
 
+print("Lead 10 model")
+earthModel_10.format();
+
  subplot(2,1,1);
  plot([ep(10,:)' egm_10])
  title('EGM 10')
@@ -24,6 +27,9 @@ egm_10 = earthModel_10.predict(bspm');
  
 %% generate model for EGM 50
 earthModel_50 = DdModelingMars(training.Ep(:,50), training.Bsp);
+print("Lead 50 model")
+earthModel_50.format();
+
 % predict EGM 50 corresponding to from new Bspm
 egm_50 = earthModel_50.predict(bspm');  
 
