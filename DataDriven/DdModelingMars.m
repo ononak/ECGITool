@@ -29,6 +29,7 @@ end
 
 
 [~, nof_egm] = size(train_ep);
+[~, nof_bs_lead] = size(train_bsp);
 
     earthModel = [earth()];
 
@@ -37,7 +38,7 @@ end
     for i =1:nof_egm
         earthModel(i) = earth();
         earthModel(i).nMaxDegree = 1; 
-        earthModel(i).nMaxTerms = 192;
+        earthModel(i).nMaxTerms = nof_bs_lead;
         %earthModel(i).Thresh = 0.000001;
         earthModel(i).Trace = 0;
         earthModel(i) = earthModel(i).train(train_bsp,train_ep(:,i));
