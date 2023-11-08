@@ -6,4 +6,5 @@ Matlab toolbox for ECG imaging, signal processing
 - Regularization parameter selection with L-curve
 - ECG noise filters (High-pass, Low-pass, Notch, Base-line)
 - ECG deliminator
+- Activation time map reconstruction
 
